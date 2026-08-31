@@ -1,0 +1,369 @@
+query getPlacesList($input: PlaceListInput, $isNmap: Boolean!, $isBounds: Boolean!, $reverseGeocodingInput: ReverseGeocodingInput, $useReverseGeocode: Boolean = false) {
+  placeList(input: $input) {
+    businesses {
+      total
+      items {
+        id
+        name
+        normalizedName
+        category
+        cid
+        detailCid {
+          c0
+          c1
+          c2
+          c3
+          __typename
+        }
+        categoryCodeList
+        dbType
+        distance
+        roadAddress
+        address
+        fullAddress
+        commonAddress
+        bookingUrl
+        phone
+        virtualPhone
+        businessHours
+        daysOff
+        imageUrl
+        imageCount
+        x
+        y
+        poiInfo {
+          polyline {
+            shapeKey {
+              id
+              name
+              version
+              __typename
+            }
+            boundary {
+              minX
+              minY
+              maxX
+              maxY
+              __typename
+            }
+            details {
+              totalDistance
+              arrivalAddress
+              departureAddress
+              __typename
+            }
+            __typename
+          }
+          polygon {
+            shapeKey {
+              id
+              name
+              version
+              __typename
+            }
+            boundary {
+              minX
+              minY
+              maxX
+              maxY
+              __typename
+            }
+            __typename
+          }
+          __typename
+        }
+        subwayId
+        markerId @include(if: $isNmap)
+        markerLabel @include(if: $isNmap) {
+          text
+          style
+          stylePreset
+          __typename
+        }
+        imageMarker @include(if: $isNmap) {
+          marker
+          markerSelected
+          __typename
+        }
+        isPublicGas
+        isDelivery
+        isTableOrder
+        isPreOrder
+        isTakeOut
+        isCvsDelivery
+        isKtOtherLocal
+        hasBooking
+        naverBookingCategory
+        bookingDisplayName
+        bookingBusinessId
+        bookingVisitId
+        bookingPickupId
+        baemin {
+          businessHours {
+            deliveryTime {
+              start
+              end
+              __typename
+            }
+            closeDate {
+              start
+              end
+              __typename
+            }
+            temporaryCloseDate {
+              start
+              end
+              __typename
+            }
+            __typename
+          }
+          __typename
+        }
+        yogiyo {
+          businessHours {
+            actualDeliveryTime {
+              start
+              end
+              __typename
+            }
+            bizHours {
+              start
+              end
+              __typename
+            }
+            __typename
+          }
+          __typename
+        }
+        isPollingStation
+        hasNPay
+        talktalkUrl
+        visitorReviewCount
+        visitorReviewScore
+        blogCafeReviewCount
+        bookingReviewCount
+        streetPanorama {
+          id
+          pan
+          tilt
+          lat
+          lon
+          __typename
+        }
+        naverBookingHubId
+        bookingHubUrl
+        bookingHubButtonName
+        newOpening
+        newBusinessHours {
+          status
+          description
+          dayOff
+          dayOffDescription
+          __typename
+        }
+        coupon {
+          total
+          promotions {
+            promotionSeq
+            couponSeq
+            conditionType
+            image {
+              url
+              __typename
+            }
+            title
+            description
+            type
+            couponUseType
+            __typename
+          }
+          __typename
+        }
+        mid
+        hasMobilePhoneNumber
+        hasMotelPriceComparison
+        hasHotelPriceComparison
+        motelMinStayPrice
+        hotelMinPrice
+        hiking {
+          distance
+          startName
+          endName
+          __typename
+        }
+        hasWheelchairEntrance
+        posInfo {
+          isPOS
+          __typename
+        }
+        shoppingBranchSummary {
+          ...PlaceShoppingBranchSummary
+          __typename
+        }
+        visitorImages {
+          id
+          reviewId
+          imageUrl
+          profileImageUrl
+          nickname
+          sourceType
+          __typename
+        }
+        visitorReviews {
+          id
+          reviewId
+          review
+          sourceType
+          __typename
+        }
+        __typename
+      }
+      searchGuide {
+        queryResults {
+          regions {
+            displayTitle
+            query
+            region {
+              rcode
+              __typename
+            }
+            __typename
+          }
+          isBusinessName
+          __typename
+        }
+        queryIndex
+        types
+        __typename
+      }
+      queryString
+      siteSort
+      isFromPrism
+      showFilterKtOtherLocal
+      __typename
+    }
+    optionsForMap @include(if: $isBounds) {
+      ...OptionsForMap
+      displayCorrectAnswer
+      correctAnswerPlaceId
+      __typename
+    }
+    filtersInfo {
+      ...FiltersInfo
+      __typename
+    }
+    houseBanners {
+      ...HouseBanners
+      __typename
+    }
+    __typename
+  }
+  reverseGeocodingAddr(input: $reverseGeocodingInput) @include(if: $useReverseGeocode) {
+    ...ReverseGeocodingAddr
+    __typename
+  }
+}
+
+fragment PlaceShoppingBranchSummary on PlaceShoppingBranchSummary {
+  branchId
+  subVertical
+  homeUrl
+  categories {
+    url
+    text
+    image {
+      origin
+      number
+      infoTitle
+      url
+      desc
+      width
+      height
+      source
+      __typename
+    }
+    __typename
+  }
+  products {
+    id
+    name
+    representImage {
+      origin
+      number
+      infoTitle
+      url
+      desc
+      width
+      height
+      source
+      __typename
+    }
+    salePrice
+    discountedSalePrice
+    discountedRatio
+    totalReviewCount
+    averageReviewScore
+    url
+    __typename
+  }
+  isFirstPurchase
+  __typename
+}
+
+fragment OptionsForMap on OptionsForMap {
+  maxZoom
+  minZoom
+  includeMyLocation
+  maxIncludePoiCount
+  center
+  spotId
+  keepMapBounds
+  __typename
+}
+
+fragment ReverseGeocodingAddr on ReverseGeocodingResult {
+  rcode
+  region
+  __typename
+}
+
+fragment FiltersInfo on PlaceListFiltersInfo {
+  filters {
+    key
+    displayName
+    clickCode
+    items {
+      apolloCacheId
+      id
+      name
+      value
+      clickCode
+      count
+      iconUrl
+      disabled
+      sub {
+        id
+        name
+        value
+        clickCode
+        __typename
+      }
+      __typename
+    }
+    selectedValue
+    separator
+    unselectValue
+    __typename
+  }
+  __typename
+}
+
+fragment HouseBanners on HouseBanner {
+  id
+  slotIndex
+  imageUrl
+  linkUrl
+  bgColor
+  altText
+  __typename
+}

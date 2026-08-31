@@ -1,0 +1,17 @@
+server:
+  servlet:
+    context-path: /api
+  port: 6085
+
+spring:
+  application:
+    name: map-place-crawler
+
+browserless:
+  # docker-compose 로 띄운 로컬 browserless 노드
+  token: ${BROWSERLESS_TOKEN:local-dev-token}
+  connect-timeout-ms: 300000
+  hosts:
+    - "localhost:4001"
+    - "localhost:4002"
+    - "localhost:4003"

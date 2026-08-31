@@ -1,0 +1,90 @@
+query getPhotoViewerItems($input: PhotoViewerInput) {
+    photoViewer(input: $input) {
+        cursors {
+            id
+            startIndex
+            hasNext
+            lastCursor
+            __typename
+        }
+        photos {
+            viewId
+            originalUrl
+            width
+            height
+            title
+            text
+            desc
+            link
+            date
+            photoType
+            mediaType
+            option {
+                channelName
+                dateString
+                playCount
+                likeCount
+                __typename
+            }
+            to
+            relation
+            logId
+            author {
+                id
+                nickname
+                from
+                imageUrl
+                objectId
+                url
+                borderImageUrl
+                __typename
+            }
+            votedKeywords {
+                code
+                iconUrl
+                iconCode
+                name
+                __typename
+            }
+            visitCount
+            originType
+            isFollowing
+            businessName
+            rating
+            externalLink {
+                title
+                url
+                __typename
+            }
+            sourceTitle
+            moment {
+                channelId
+                contentId
+                momentId
+                gdid
+                blogRelation
+                statAllowYn
+                category
+                docNo
+                __typename
+            }
+            video {
+                videoId
+                videoUrl
+                trailerUrl
+                __typename
+            }
+            music {
+                artists
+                title
+                __typename
+            }
+            clip {
+                serviceType
+                __typename
+            }
+            __typename
+        }
+        __typename
+    }
+}

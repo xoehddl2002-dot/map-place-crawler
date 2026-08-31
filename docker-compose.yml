@@ -1,0 +1,22 @@
+# 로컬 실행용: browserless 노드 3대를 띄우고 애플리케이션이 이를 워커 풀로 사용한다.
+services:
+  browserless-1:
+    image: ghcr.io/browserless/chromium:v2.56.0@sha256:6f3149efabf5e04a44385974448c85264398db416bc63f884564316d0fcadc3e
+    ports: ["4001:3000"]
+    environment: &browserless-env
+      TOKEN: ${BROWSERLESS_TOKEN:-local-dev-token}
+      CONCURRENT: 5
+      TIMEOUT: 300000
+    shm_size: 1gb
+
+  browserless-2:
+    image: ghcr.io/browserless/chromium:v2.56.0@sha256:6f3149efabf5e04a44385974448c85264398db416bc63f884564316d0fcadc3e
+    ports: ["4002:3000"]
+    environment: *browserless-env
+    shm_size: 1gb
+
+  browserless-3:
+    image: ghcr.io/browserless/chromium:v2.56.0@sha256:6f3149efabf5e04a44385974448c85264398db416bc63f884564316d0fcadc3e
+    ports: ["4003:3000"]
+    environment: *browserless-env
+    shm_size: 1gb

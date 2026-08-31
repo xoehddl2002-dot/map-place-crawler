@@ -1,0 +1,14 @@
+server:
+  servlet:
+    context-path: /api
+  port: 6085
+
+spring:
+  application:
+    name: map-place-crawler
+
+browserless:
+  # 노드 증설 시 코드 변경 없이 환경변수만 교체한다. (예: "10.0.0.11:4001,10.0.0.12:4001")
+  token: ${BROWSERLESS_TOKEN}
+  connect-timeout-ms: 300000
+  hosts: ${BROWSERLESS_HOSTS:localhost:4001}

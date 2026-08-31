@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5p] [%F]%M\(%t\) : %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="defaultFileLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR:-/logs}/default.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR:-/logs}/%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 아카이브 파일 1개당 최대 500MB -->
+            <maxFileSize>500MB</maxFileSize>
+            <!-- 전체 아카이브가 20GB 를 넘으면 오래된 파일부터 삭제 -->
+            <totalSizeCap>20GB</totalSizeCap>
+            <!-- 30일 보관 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5p] [%F]%M\(%t\) : %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.mapcrawler" level="INFO"/>
+    <logger name="org.springframework.web" level="WARN"/>
+
+    <root level="WARN">
+        <appender-ref ref="console"/>
+        <appender-ref ref="defaultFileLog"/>
+    </root>
+</configuration>

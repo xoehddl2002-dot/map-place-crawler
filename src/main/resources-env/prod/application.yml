@@ -1,0 +1,13 @@
+server:
+  servlet:
+    context-path: /api
+  port: 6085
+
+spring:
+  application:
+    name: map-place-crawler
+
+browserless:
+  token: ${BROWSERLESS_TOKEN}
+  connect-timeout-ms: 300000
+  hosts: ${BROWSERLESS_HOSTS}
